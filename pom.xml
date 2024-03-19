@@ -11,7 +11,7 @@
 	<groupId>com.semillero</groupId>
 	<artifactId>ubuntu</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
+<!--	<packaging>war</packaging>-->
 	<name>ubuntu</name>
 	<description>Financiamiento sostenible</description>
 	<properties>
