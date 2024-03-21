@@ -8,7 +8,9 @@ import org.springframework.http.HttpMethod;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import java.util.Arrays;
 
@@ -18,6 +20,25 @@ public class CorsConfig {
 
     @Value("${cors.hosts}")
     private String hosts;
+
+    /**
+     * Configures global CORS settings for the application using WebMvcConfigurer.
+     *
+     * @return An instance of WebMvcConfigurer with CORS settings.
+     */
+    @Bean
+    public WebMvcConfigurer corsConfigurer() {
+        return new WebMvcConfigurer() {
+            @Override
+            public void addCorsMappings(CorsRegistry registry) {
+                registry.addMapping("/**")
+                        .allowedOrigins("*")
+                        .allowedHeaders("*");
+            }
+        };
+    }
+
+
     @Bean
     public CorsFilter corsFilter(){
 

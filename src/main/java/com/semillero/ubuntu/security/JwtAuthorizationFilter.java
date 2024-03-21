@@ -45,6 +45,5 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
             }
         }
         filterChain.doFilter(request, response);
-        System.out.println(SecurityContextHolder.getContext().getAuthentication().getAuthorities());
     }
 }
