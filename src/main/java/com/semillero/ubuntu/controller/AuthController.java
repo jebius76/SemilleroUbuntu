@@ -50,6 +50,7 @@ public class AuthController {
     @Autowired
     CookieGenerator cookieGenerator;
 
+    @Autowired
     UserEntityMapper userEntityMapper;
     /**
      * Controller to register a new user
