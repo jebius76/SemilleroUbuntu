@@ -46,7 +46,7 @@ public class AuthController {
     UserDetailsService userDetailsService;
     @Autowired
     AuthenticationManager authenticationManager;
-    JwtUtil jwtUtil;
+    
     @Autowired
     CookieGenerator cookieGenerator;
 
@@ -80,7 +80,7 @@ public class AuthController {
                     )
             );
             SecurityContextHolder.getContext().setAuthentication(authentication);
-            String token = jwtUtil.generateToken(loginEmail);
+            
             UserDetails userDetails = userDetailsService.loadUserByUsername(loginEmail);
             response.addCookie(cookieGenerator.generateCookie(loginEmail));
             return new ResponseEntity<>(userEntityMapper.mapLoginUserResponseDto(loginEmail), HttpStatus.OK);
