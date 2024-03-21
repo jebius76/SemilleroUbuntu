@@ -24,7 +24,9 @@ public class CorsConfig {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowCredentials(true);
-        config.setAllowedOrigins(Arrays.asList(hosts.split(","))); //React environment
+        config.addAllowedOrigin("http://localhost:4200"); //React environment
+        config.addAllowedOrigin("http://localhost:3000"); //Angular environment
+        config.addAllowedOrigin("http://localhost:5173"); //Angular environment
         config.setAllowedHeaders(Arrays.asList(
                 HttpHeaders.AUTHORIZATION,
                 HttpHeaders.CONTENT_TYPE,
