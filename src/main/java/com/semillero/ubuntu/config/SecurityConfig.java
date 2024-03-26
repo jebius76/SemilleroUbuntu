@@ -70,7 +70,6 @@ public class SecurityConfig {
 
         return http
                 .csrf(AbstractHttpConfigurer::disable)
-                .cors(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> {
                     auth
                             .requestMatchers("/api/v1/auth/**").permitAll()
