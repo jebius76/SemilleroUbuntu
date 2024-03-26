@@ -16,7 +16,7 @@ public class CookieGenerator {
     public Cookie generateCookie(String data) {
         String token = jwtUtil.generateToken(data);
         Cookie cookie = new Cookie("AuthorizedUser", token);
-        cookie.setSecure(true);
+        cookie.setSecure(false);
         cookie.setAttribute("SameSite", "none");
         cookie.setMaxAge(604800);
         cookie.setPath("/");
