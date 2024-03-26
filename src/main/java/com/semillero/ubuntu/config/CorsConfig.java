@@ -1,8 +1,10 @@
 package com.semillero.ubuntu.config;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.Ordered;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.web.cors.CorsConfiguration;
@@ -20,6 +22,7 @@ public class CorsConfig {
 
     @Value("${cors.hosts}")
     private String hosts;
+
 
     /**
      * Configures global CORS settings for the application using WebMvcConfigurer.
@@ -40,7 +43,7 @@ public class CorsConfig {
 
 
     @Bean
-    public CorsFilter corsFilter(){
+    public FilterRegistrationBean<CorsFilter> corsFilter(){
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         CorsConfiguration config = new CorsConfiguration();
@@ -62,7 +65,12 @@ public class CorsConfig {
         config.setMaxAge(3600L);
         source.registerCorsConfiguration("/**", config);
 
-        return new CorsFilter(source);
+        FilterRegistrationBean<CorsFilter> bean = new FilterRegistrationBean<>(new CorsFilter(source));
+        bean.setOrder(Ordered.HIGHEST_PRECEDENCE);
+        return bean;
+
 
     }
+
+
 }
