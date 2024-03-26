@@ -33,9 +33,10 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         Cookie cookie = WebUtils.getCookie(request, "AuthorizedUser");
-        System.out.println("Token: " + cookie.getValue());
+
         if (cookie != null){
             String token = cookie.getValue();
+            System.out.println("Token: " + token);
             if (jwtUtil.isTokenValid(token)){
                 String username = jwtUtil.getUserNameFromToken(token);
                 UserDetails userDetails = null;
