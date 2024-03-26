@@ -43,7 +43,7 @@ public class CorsConfig {
 
 
     @Bean
-    public FilterRegistrationBean<CorsFilter> corsFilter(){
+    public CorsFilter corsFilter(){
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         CorsConfiguration config = new CorsConfiguration();
@@ -65,12 +65,7 @@ public class CorsConfig {
         config.setMaxAge(3600L);
         source.registerCorsConfiguration("/**", config);
 
-        FilterRegistrationBean<CorsFilter> bean = new FilterRegistrationBean<>(new CorsFilter(source));
-        bean.setOrder(Ordered.HIGHEST_PRECEDENCE);
+        CorsFilter bean = new CorsFilter(source);
         return bean;
-
-
     }
-
-
 }

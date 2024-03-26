@@ -57,7 +57,7 @@ public class SecurityConfig {
      * @throws Exception If there is any error configuring the filter.
      */
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http, AuthenticationManager authenticationManager) throws Exception {
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
         RequestMatcher publicUrls = new OrRequestMatcher(
                 new AntPathRequestMatcher("/api/v1/hello/**"),
