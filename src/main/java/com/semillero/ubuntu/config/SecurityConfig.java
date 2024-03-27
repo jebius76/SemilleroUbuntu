@@ -8,6 +8,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -21,6 +23,11 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.security.web.util.matcher.OrRequestMatcher;
 import org.springframework.security.web.util.matcher.RequestMatcher;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+
+import java.util.Arrays;
 
 /**
  * Application security configuration.
@@ -70,6 +77,7 @@ public class SecurityConfig {
 
         return http
                 .csrf(AbstractHttpConfigurer::disable)
+                .cors(cors->cors.configurationSource(corsFilter()))
                 .authorizeHttpRequests(auth -> {
                     auth
                             .requestMatchers("/api/v1/auth/**").permitAll()
@@ -80,8 +88,12 @@ public class SecurityConfig {
                 .addFilterBefore(jwtAuthorizationFilter, UsernamePasswordAuthenticationFilter.class)
                 .oauth2Login(oauth -> oauth
                         .defaultSuccessUrl("/api/v1/auth/loggedIn",true)
-                        .loginPage("/api/v1/auth/forbidden")
-                        .failureUrl("/api/v1/auth/loginFailure")
+//                        .loginPage("http://localhost:8080/login")
+//                        .failureUrl("/api/v1/auth/loginFailure")
+//                        .redirectionEndpoint(endpoint->endpoint
+//                                .baseUri("http://localhost:8080/login/oauth2/code/google")
+//
+//                        )
                         .userInfoEndpoint(infoEndpoint -> infoEndpoint
                                 .userService(oAuth2UserService)))
 
@@ -92,6 +104,33 @@ public class SecurityConfig {
                         .invalidateHttpSession(true)
                 )
                 .build();
+    }
+    @Bean
+    public CorsConfigurationSource corsFilter(){
+
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        CorsConfiguration config = new CorsConfiguration();
+        config.setAllowCredentials(true);
+        config.addAllowedOrigin("http://localhost:4200"); //React environment
+        config.addAllowedOrigin("http://localhost:3000"); //Angular environment
+        config.addAllowedOrigin("http://localhost:5173"); //Vite environment
+        config.addAllowedHeader("*");
+        config.addAllowedMethod("*");
+//        config.setAllowedHeaders(Arrays.asList(
+//                HttpHeaders.AUTHORIZATION,
+//                HttpHeaders.CONTENT_TYPE,
+//                HttpHeaders.ACCEPT
+//        ));
+//        config.setAllowedMethods(Arrays.asList(
+//                HttpMethod.GET.name(),
+//                HttpMethod.POST.name(),
+//                HttpMethod.PUT.name(),
+//                HttpMethod.DELETE.name()
+//        ));
+        config.setMaxAge(3600L);
+        source.registerCorsConfiguration("/**", config);
+
+        return source;
     }
 
     /**

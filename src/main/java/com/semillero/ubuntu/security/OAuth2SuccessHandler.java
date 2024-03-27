@@ -26,6 +26,6 @@ public class OAuth2SuccessHandler implements AuthenticationSuccessHandler {
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
-        response.addCookie(cookieGenerator.generateCookie(authentication.getName()));
+//        response.addCookie(cookieGenerator.generateCookie(authentication.getName()));
     }
 }

@@ -92,7 +92,7 @@ public class AuthController {
 
     @GetMapping("/loggedIn")
     public RedirectView loggedIn(HttpServletResponse response){
-        response.addCookie(cookieGenerator.generateCookie(SecurityContextHolder.getContext().getAuthentication().getName()));
+//        response.addCookie(cookieGenerator.generateCookie(SecurityContextHolder.getContext().getAuthentication().getName()));
         return new RedirectView(homePage);
     }
 
