@@ -17,8 +17,6 @@ public class CookieGenerator {
         String token = jwtUtil.generateToken(data);
         Cookie cookie = new Cookie("AuthorizedUser", token);
         cookie.setSecure(true);
-        cookie.setAttribute("SameSite", "none");
-        cookie.setAttribute("Partitioned", "true");
         cookie.setMaxAge(604800);
         cookie.setPath("/");
         return cookie;

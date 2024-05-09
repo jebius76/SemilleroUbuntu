@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+</head>
+
+<body>
+<div class="container">
+    <h1 class="title-h1">¡Novedades de la semana!</h1>
+    <p style="text-align: center;">Nos complace presentarte las últimas oportunidades de inversión disponibles. Como parte de nuestro compromiso de apoyar a productores y microemprendedores, hemos agregado nuevos microemprendimientos que podrían ser de tu interés.</p>
+    <hr />
+    <div>
+        <h2 class="title-h2">Nuevos microemprendimientos</h2>
+        <div th:each="micro : ${microemprendimientos}" class="container-info">
+            <div>
+                <div>
+                    <img
+                            width="100px"
+                            src="https://vetmarketportal.com.ar/uploads/noticias/5/20221018120801_naturaleza.jpg"
+                            alt="..."
+                    />
+                </div>
+                <div>
+                    <div class="description">
+                        <h5 th:text="${micro.nombre}" class="title"></h5>
+                        <p th:text="${micro.descripcion}" class="description">
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br />
+    <hr />
+
+    <div th:if="${publications.size() > 0}">
+        <h2 class="title-h2">Nuevas publicaciones</h2>
+        <div th:each="publi : ${publications}" class="container-info">
+            <div>
+                <div>
+                    <img
+                            width="100px"
+                            src="https://vetmarketportal.com.ar/uploads/noticias/5/20221018120801_naturaleza.jpg"
+                            alt="..."
+                    />
+                </div>
+                <div>
+                    <div>
+                        <h5 th:text="${publi.title}"></h5>
+                        <p th:text="${publi.description}"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br>
+<hr>
+<div>
+    <p>Saludos cordiales,</p>
+    <p>Ubuntu - Financiamiento sostenible</p>
+    <p>Contacto: </p>
+</div>
+</body>
+
+<style>
+    * {
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    body {
+        background: rgb(29, 145, 41);
+        background: radial-gradient(
+                circle,
+                rgba(29, 145, 41, 1) 0%,
+                rgba(34, 101, 22, 1) 100%
+        );
+        color: #fdfdfd;
+    }
+
+    img {
+        width: 100px;
+    }
+
+    .container-info {
+        margin: 0 auto;
+        border: 0.5px solid #093c59;
+        border-radius: 10px;
+        max-width: 400px;
+        overflow: hidden;
+    }
+
+    .title-h1 {
+        text-align: center;
+        text-shadow: -1px -1px 0 #093c59, 1px -1px 0 #093c59, -1px 1px 0 #093c59,
+        1px 1px 0 #093c59;
+    }
+
+    .title-h2 {
+        text-align: center;
+    }
+
+    .title {
+        font-size: 20px;
+        margin: 0;
+        box-sizing: border-box;
+    }
+
+    .description {
+        font-size: 10px;
+    }
+</style>
+</html>

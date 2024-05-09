@@ -8,6 +8,7 @@ public class UbuntuApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(UbuntuApplication.class, args);
+		System.out.println("Ubuntu Project Start.");
 	}
 
 }

@@ -1,7 +1,7 @@
 package com.semillero.ubuntu.initializer;
 
-import com.semillero.ubuntu.entity.Role;
-import com.semillero.ubuntu.repository.RoleRepository;
+import com.semillero.ubuntu.entities.Role;
+import com.semillero.ubuntu.repositories.RoleRepository;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;

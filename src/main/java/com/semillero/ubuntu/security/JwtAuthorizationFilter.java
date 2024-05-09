@@ -1,7 +1,7 @@
 package com.semillero.ubuntu.security;
 
-import com.semillero.ubuntu.repository.RoleRepository;
-import com.semillero.ubuntu.service.UserDetailsServiceImpl;
+import com.semillero.ubuntu.repositories.RoleRepository;
+import com.semillero.ubuntu.services.impl.UserDetailsServiceImpl;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.Cookie;
@@ -33,10 +33,8 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         Cookie cookie = WebUtils.getCookie(request, "AuthorizedUser");
-
         if (cookie != null){
             String token = cookie.getValue();
-            System.out.println("Token: " + token);
             if (jwtUtil.isTokenValid(token)){
                 String username = jwtUtil.getUserNameFromToken(token);
                 UserDetails userDetails = null;
